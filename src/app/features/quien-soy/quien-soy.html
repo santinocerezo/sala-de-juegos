@@ -1,0 +1,98 @@
+<section class="container py-5">
+
+  @if (user() === undefined) {
+    <div class="text-center py-5">
+      <div class="spinner-border text-primary" role="status"></div>
+      <p class="mt-3 text-muted">Cargando datos desde GitHub...</p>
+    </div>
+  } @else if (user() === null) {
+    <div class="alert alert-danger text-center">
+      <i class="bi bi-exclamation-triangle me-2"></i>
+      No se pudieron cargar los datos de GitHub.
+    </div>
+  } @else {
+    <div class="row justify-content-center">
+      <div class="col-md-10 col-lg-8">
+
+        <div class="card shadow sj-perfil-card">
+          <div class="card-body p-4">
+
+            <div class="row g-4 align-items-center">
+              <div class="col-md-4 text-center">
+                <img
+                  [src]="user()!.avatar_url"
+                  alt="Avatar de {{ user()!.login }}"
+                  class="rounded-circle img-fluid shadow"
+                  style="max-width: 200px"
+                />
+              </div>
+
+              <div class="col-md-8">
+                <h2 class="fw-bold mb-1">
+                  {{ user()!.name ?? user()!.login }}
+                </h2>
+                <p class="text-muted mb-2">
+                  <i class="bi bi-github me-1"></i>&#64;{{ user()!.login }}
+                </p>
+
+                @if (user()!.bio) {
+                  <p class="mb-2">{{ user()!.bio }}</p>
+                }
+
+                @if (user()!.location) {
+                  <p class="mb-3">
+                    <i class="bi bi-geo-alt me-1 text-primary"></i>{{ user()!.location }}
+                  </p>
+                }
+
+                <div class="d-flex gap-3 mb-3">
+                  <div class="text-center">
+                    <strong class="d-block fs-4">{{ user()!.public_repos }}</strong>
+                    <small class="text-muted">repos</small>
+                  </div>
+                  <div class="text-center">
+                    <strong class="d-block fs-4">{{ user()!.followers }}</strong>
+                    <small class="text-muted">seguidores</small>
+                  </div>
+                  <div class="text-center">
+                    <strong class="d-block fs-4">{{ user()!.following }}</strong>
+                    <small class="text-muted">siguiendo</small>
+                  </div>
+                </div>
+
+                <a
+                  [href]="user()!.html_url"
+                  target="_blank"
+                  rel="noopener"
+                  class="btn btn-outline-primary"
+                >
+                  <i class="bi bi-github me-1"></i>Ver perfil en GitHub
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="card shadow mt-4 sj-perfil-card">
+          <div class="card-body p-4">
+            <h3 class="fw-bold">
+              <i class="bi bi-mortarboard me-2 text-primary"></i>Sobre el proyecto
+            </h3>
+            <p class="mb-2">
+              Este TP corresponde a la materia <strong>Programación IV</strong>
+              de la Tecnicatura Universitaria en Programación
+              (<strong>UTN Avellaneda</strong>).
+            </p>
+            <p class="mb-0">
+              La aplicación se construye por sprints. El juego propio se
+              definirá más adelante; las reglas se van a explicar en esta misma
+              página cuando esté implementado.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  }
+</section>

@@ -1,0 +1,39 @@
+// Color de fondo de la navbar usando la variable global de styles.scss.
+// Override del estilo default de Bootstrap (que viene transparente).
+.sj-navbar {
+  background-color: var(--sj-primary-dark);
+}
+
+// Links: cuando el routerLinkActive aplica la clase "active",
+// le ponemos un subrayado animado para resaltar el link actual.
+.nav-link {
+  position: relative;
+  color: rgba(255, 255, 255, 0.8);
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: #fff;
+  }
+
+  // ::after es un pseudo-elemento: una "barrita" debajo del link.
+  // De ancho 0 por defecto, crece al 100% cuando el link está activo.
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background-color: var(--sj-accent);
+    transition: width 0.25s ease, left 0.25s ease;
+  }
+
+  &.active {
+    color: #fff;
+
+    &::after {
+      width: 100%;
+      left: 0;
+    }
+  }
+}

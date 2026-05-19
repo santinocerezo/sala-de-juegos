@@ -1,0 +1,14 @@
+.sj-footer {
+  background-color: var(--sj-primary-dark);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.sj-repo-link {
+  color: var(--sj-accent);
+  text-decoration: none;
+
+  &:hover {
+    color: #fff;
+    text-decoration: underline;
+  }
+}

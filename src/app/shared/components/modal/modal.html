@@ -1,0 +1,30 @@
+@if (open()) {
+  <div class="sj-modal-backdrop" (click)="cerrar()">
+    <div
+      class="sj-modal card shadow-lg"
+      role="dialog"
+      aria-modal="true"
+      (click)="$event.stopPropagation()"
+    >
+      <div class="card-header d-flex justify-content-between align-items-center">
+        <h5 class="m-0">{{ title() }}</h5>
+        <button
+          type="button"
+          class="btn-close"
+          aria-label="Cerrar"
+          (click)="cerrar()"
+        ></button>
+      </div>
+
+      <div class="card-body">
+        <p class="m-0">{{ message() }}</p>
+      </div>
+
+      <div class="card-footer text-end">
+        <button type="button" class="btn btn-primary" (click)="cerrar()">
+          Entendido
+        </button>
+      </div>
+    </div>
+  </div>
+}

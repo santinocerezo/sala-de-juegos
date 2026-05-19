@@ -1,0 +1,28 @@
+// Estilos globales
+
+:root {
+  --sj-primary: #4f46e5;
+  --sj-primary-dark: #3730a3;
+  --sj-accent: #f59e0b;
+  --sj-bg: #f8fafc;
+  --sj-text: #1e293b;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+}
+
+body {
+  background-color: var(--sj-bg);
+  color: var(--sj-text);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+// Layout flex para el sticky footer (el <main> crece y empuja al footer abajo).
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
