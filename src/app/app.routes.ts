@@ -1,10 +1,8 @@
 import { Routes } from '@angular/router';
 
 export const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-
   {
-    path: 'home',
+    path: '',
     title: 'Sala de Juegos · Inicio',
     loadComponent: () => import('./features/home/home').then(m => m.Home),
   },
@@ -25,5 +23,5 @@ export const routes: Routes = [
   },
 
   // Cualquier ruta no reconocida vuelve al home.
-  { path: '**', redirectTo: 'home' },
+  { path: '**', redirectTo: '' },
 ];
