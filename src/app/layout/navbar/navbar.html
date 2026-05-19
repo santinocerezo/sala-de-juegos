@@ -1,7 +1,8 @@
 <nav class="navbar navbar-expand-lg navbar-dark sticky-top sj-navbar">
   <div class="container">
-    <a class="navbar-brand fw-bold" routerLink="/home">
-      <i class="bi bi-controller me-2"></i>Sala de Juegos
+    <a class="navbar-brand fw-bold d-flex align-items-center" routerLink="/">
+      <img src="favicon.svg" alt="Logo Sala de Juegos" width="28" height="28" class="me-2" />
+      Sala de Juegos
     </a>
 
     <button
@@ -19,7 +20,12 @@
     <div class="collapse navbar-collapse" id="navContent">
       <ul class="navbar-nav ms-auto">
         <li class="nav-item">
-          <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
+          <a
+            class="nav-link"
+            routerLink="/"
+            routerLinkActive="active"
+            [routerLinkActiveOptions]="{ exact: true }"
+          >Inicio</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
