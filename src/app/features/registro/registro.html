@@ -1,0 +1,140 @@
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-7 col-lg-6">
+
+      <div class="card shadow sj-form-card">
+        <div class="card-body p-4">
+
+          <div class="text-center mb-4">
+            <i class="bi bi-person-plus display-3 text-success"></i>
+            <h2 class="mt-2">Crear cuenta</h2>
+            <p class="text-muted">Completá los datos para registrarte.</p>
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+            <div class="mb-3">
+              <label for="correo" class="form-label">Correo electrónico</label>
+              <input
+                id="correo"
+                type="email"
+                class="form-control"
+                placeholder="ejemplo@gmail.com"
+                formControlName="correo"
+              />
+              @if (correo.touched && correo.invalid) {
+                <small class="text-danger">
+                  @if (correo.errors?.['required']) {
+                    El correo es obligatorio.
+                  } @else if (correo.errors?.['email']) {
+                    El correo no tiene un formato válido.
+                  }
+                </small>
+              }
+            </div>
+
+            <div class="row g-3 mb-3">
+              <div class="col-md-6">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input
+                  id="nombre"
+                  type="text"
+                  class="form-control"
+                  formControlName="nombre"
+                />
+                @if (nombre.touched && nombre.invalid) {
+                  <small class="text-danger">El nombre es obligatorio.</small>
+                }
+              </div>
+
+              <div class="col-md-6">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input
+                  id="apellido"
+                  type="text"
+                  class="form-control"
+                  formControlName="apellido"
+                />
+                @if (apellido.touched && apellido.invalid) {
+                  <small class="text-danger">El apellido es obligatorio.</small>
+                }
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="edad" class="form-label">Edad</label>
+              <input
+                id="edad"
+                type="number"
+                min="13"
+                class="form-control"
+                placeholder="Mínimo 13 años"
+                formControlName="edad"
+              />
+              @if (edad.touched && edad.invalid) {
+                <small class="text-danger">
+                  @if (edad.errors?.['required']) {
+                    La edad es obligatoria.
+                  } @else if (edad.errors?.['min']) {
+                    Tenés que tener al menos 13 años.
+                  }
+                </small>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <div class="input-group">
+                <input
+                  id="password"
+                  [type]="showPassword() ? 'text' : 'password'"
+                  class="form-control"
+                  placeholder="Mínimo 6 caracteres"
+                  formControlName="password"
+                />
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  (click)="togglePassword()"
+                  aria-label="Mostrar/ocultar contraseña"
+                >
+                  <i class="bi" [class.bi-eye]="!showPassword()" [class.bi-eye-slash]="showPassword()"></i>
+                </button>
+              </div>
+              @if (password.touched && password.invalid) {
+                <small class="text-danger">
+                  @if (password.errors?.['required']) {
+                    La contraseña es obligatoria.
+                  } @else if (password.errors?.['minlength']) {
+                    Mínimo 6 caracteres.
+                  }
+                </small>
+              }
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-success w-100"
+              [disabled]="form.invalid"
+            >
+              Registrarme
+            </button>
+
+            <p class="text-center text-muted mt-3 mb-0">
+              ¿Ya tenés cuenta? <a routerLink="/login">Iniciá sesión</a>.
+            </p>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<app-modal
+  [open]="mostrarModal()"
+  title="Aviso"
+  message="El registro real se implementa más adelante."
+  (closed)="cerrarModal()"
+/>

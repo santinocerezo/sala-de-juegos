@@ -1,0 +1,91 @@
+<section class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+
+      <div class="card shadow sj-form-card">
+        <div class="card-body p-4">
+
+          <div class="text-center mb-4">
+            <i class="bi bi-box-arrow-in-right display-3 text-primary"></i>
+            <h2 class="mt-2">Iniciar sesión</h2>
+            <p class="text-muted">Ingresá con tu cuenta para jugar.</p>
+          </div>
+
+          <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+
+            <div class="mb-3">
+              <label for="email" class="form-label">Correo electrónico</label>
+              <input
+                id="email"
+                type="email"
+                class="form-control"
+                placeholder="ejemplo@gmail.com"
+                formControlName="email"
+              />
+              @if (email.touched && email.invalid) {
+                <small class="text-danger">
+                  @if (email.errors?.['required']) {
+                    El email es obligatorio.
+                  } @else if (email.errors?.['email']) {
+                    El email no tiene un formato válido.
+                  }
+                </small>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="password" class="form-label">Contraseña</label>
+              <div class="input-group">
+                <input
+                  id="password"
+                  [type]="showPassword() ? 'text' : 'password'"
+                  class="form-control"
+                  placeholder="Mínimo 6 caracteres"
+                  formControlName="password"
+                />
+                <button
+                  type="button"
+                  class="btn btn-outline-secondary"
+                  (click)="togglePassword()"
+                  aria-label="Mostrar/ocultar contraseña"
+                >
+                  <i class="bi" [class.bi-eye]="!showPassword()" [class.bi-eye-slash]="showPassword()"></i>
+                </button>
+              </div>
+              @if (password.touched && password.invalid) {
+                <small class="text-danger">
+                  @if (password.errors?.['required']) {
+                    La contraseña es obligatoria.
+                  } @else if (password.errors?.['minlength']) {
+                    Mínimo 6 caracteres.
+                  }
+                </small>
+              }
+            </div>
+
+            <button
+              type="submit"
+              class="btn btn-primary w-100"
+              [disabled]="form.invalid"
+            >
+              Ingresar
+            </button>
+
+            <p class="text-center text-muted mt-3 mb-0">
+              ¿No tenés cuenta? <a routerLink="/registro">Registrate</a>.
+            </p>
+          </form>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<app-modal
+  [open]="mostrarModal()"
+  title="Aviso"
+  message="La autenticación real se implementa más adelante."
+  (closed)="cerrarModal()"
+/>
