@@ -115,9 +115,14 @@
             <button
               type="submit"
               class="btn btn-success w-100"
-              [disabled]="form.invalid"
+              [disabled]="form.invalid || cargando()"
             >
-              Registrarme
+              @if (cargando()) {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Creando cuenta...
+              } @else {
+                Registrarme
+              }
             </button>
 
             <p class="text-center text-muted mt-3 mb-0">
@@ -133,8 +138,8 @@
 </section>
 
 <app-modal
-  [open]="mostrarModal()"
-  title="Aviso"
-  message="El registro real se implementa más adelante."
-  (closed)="cerrarModal()"
+  [open]="mostrarError()"
+  title="No pudimos crear la cuenta"
+  [message]="mensajeError()"
+  (closed)="cerrarError()"
 />

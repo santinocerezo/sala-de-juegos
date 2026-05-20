@@ -66,15 +66,33 @@
             <button
               type="submit"
               class="btn btn-primary w-100"
-              [disabled]="form.invalid"
+              [disabled]="form.invalid || cargando()"
             >
-              Ingresar
+              @if (cargando()) {
+                <span class="spinner-border spinner-border-sm me-2"></span>
+                Ingresando...
+              } @else {
+                Ingresar
+              }
             </button>
 
             <p class="text-center text-muted mt-3 mb-0">
               ¿No tenés cuenta? <a routerLink="/registro">Registrate</a>.
             </p>
           </form>
+
+          <hr class="my-4" />
+          <p class="text-center text-muted small mb-2">Acceso rápido para pruebas:</p>
+          <div class="d-flex gap-2 justify-content-center">
+            @for (u of usuariosRapidos; track u.email) {
+              <button
+                type="button"
+                class="btn btn-outline-secondary btn-sm"
+                (click)="loginRapido(u)"
+                [disabled]="cargando()"
+              >{{ u.etiqueta }}</button>
+            }
+          </div>
 
         </div>
       </div>
@@ -84,8 +102,8 @@
 </section>
 
 <app-modal
-  [open]="mostrarModal()"
-  title="Aviso"
-  message="La autenticación real se implementa más adelante."
-  (closed)="cerrarModal()"
+  [open]="mostrarError()"
+  title="No pudimos iniciar sesión"
+  [message]="mensajeError()"
+  (closed)="cerrarError()"
 />

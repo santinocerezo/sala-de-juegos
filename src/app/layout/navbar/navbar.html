@@ -18,7 +18,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navContent">
-      <ul class="navbar-nav ms-auto">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
         <li class="nav-item">
           <a
             class="nav-link"
@@ -27,15 +27,36 @@
             [routerLinkActiveOptions]="{ exact: true }"
           >Inicio</a>
         </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="/registro" routerLinkActive="active">Registro</a>
-        </li>
+
         <li class="nav-item">
           <a class="nav-link" routerLink="/quien-soy" routerLinkActive="active">Quién Soy</a>
         </li>
+
+        @if (user()) {
+          @if (profile(); as p) {
+            <li class="nav-item ms-lg-3">
+              <span class="navbar-text text-white-50 small">
+                <i class="bi bi-person-circle me-1"></i>{{ p.nombre }}
+              </span>
+            </li>
+          }
+          <li class="nav-item ms-lg-2">
+            <button
+              type="button"
+              class="btn btn-sm btn-outline-light"
+              (click)="logout()"
+            >
+              <i class="bi bi-box-arrow-right me-1"></i>Salir
+            </button>
+          </li>
+        } @else {
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/login" routerLinkActive="active">Iniciar sesión</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/registro" routerLinkActive="active">Registro</a>
+          </li>
+        }
       </ul>
     </div>
   </div>
