@@ -1,43 +1,76 @@
 <section class="sj-hero text-white text-center py-5">
   <div class="container">
     <img src="favicon.svg" alt="Logo Sala de Juegos" width="96" height="96" class="sj-hero-logo" />
-    <h1 class="display-4 fw-bold mt-3">Sala de Juegos</h1>
-    <p class="lead mb-0">
-      Medí tus capacidades cognitivas y motrices con nuestros minijuegos.
-    </p>
+    @if (profile(); as p) {
+      <h1 class="display-4 fw-bold mt-3">¡Hola, {{ p.nombre }}!</h1>
+      <p class="lead mb-0">Bienvenido de nuevo a la Sala de Juegos.</p>
+    } @else {
+      <h1 class="display-4 fw-bold mt-3">Sala de Juegos</h1>
+      <p class="lead mb-0">
+        Medí tus capacidades cognitivas y motrices con nuestros minijuegos.
+      </p>
+    }
   </div>
 </section>
 
 <section class="container my-5">
   <div class="row g-4 justify-content-center">
-    <div class="col-md-4">
-      <a routerLink="/login" class="sj-card-link">
-        <div class="card h-100 text-center p-4 sj-card">
-          <i class="bi bi-box-arrow-in-right display-4 text-primary mb-3"></i>
-          <h3>Iniciar sesión</h3>
-          <p class="text-muted m-0">¿Ya tenés cuenta? Entrá a jugar.</p>
-        </div>
-      </a>
-    </div>
 
-    <div class="col-md-4">
-      <a routerLink="/registro" class="sj-card-link">
-        <div class="card h-100 text-center p-4 sj-card">
-          <i class="bi bi-person-plus display-4 text-success mb-3"></i>
-          <h3>Crear cuenta</h3>
-          <p class="text-muted m-0">¿Es tu primera vez? Registrate.</p>
-        </div>
-      </a>
-    </div>
+    @if (user()) {
+      <div class="col-md-6">
+        <a routerLink="/quien-soy" class="sj-card-link">
+          <div class="card h-100 text-center p-4 sj-card">
+            <i class="bi bi-person-badge display-4 text-warning mb-3"></i>
+            <h3>Quién Soy</h3>
+            <p class="text-muted m-0">Conocé al autor del proyecto.</p>
+          </div>
+        </a>
+      </div>
 
-    <div class="col-md-4">
-      <a routerLink="/quien-soy" class="sj-card-link">
-        <div class="card h-100 text-center p-4 sj-card">
-          <i class="bi bi-person-badge display-4 text-warning mb-3"></i>
-          <h3>Quién Soy</h3>
-          <p class="text-muted m-0">Conocé al autor del proyecto.</p>
-        </div>
-      </a>
-    </div>
+      <div class="col-md-6">
+        <button
+          type="button"
+          class="sj-card-link w-100 border-0 bg-transparent p-0"
+          (click)="logout()"
+        >
+          <div class="card h-100 text-center p-4 sj-card">
+            <i class="bi bi-box-arrow-right display-4 text-danger mb-3"></i>
+            <h3>Cerrar sesión</h3>
+            <p class="text-muted m-0">Salí de tu cuenta.</p>
+          </div>
+        </button>
+      </div>
+    } @else {
+      <div class="col-md-4">
+        <a routerLink="/login" class="sj-card-link">
+          <div class="card h-100 text-center p-4 sj-card">
+            <i class="bi bi-box-arrow-in-right display-4 text-primary mb-3"></i>
+            <h3>Iniciar sesión</h3>
+            <p class="text-muted m-0">¿Ya tenés cuenta? Entrá a jugar.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a routerLink="/registro" class="sj-card-link">
+          <div class="card h-100 text-center p-4 sj-card">
+            <i class="bi bi-person-plus display-4 text-success mb-3"></i>
+            <h3>Crear cuenta</h3>
+            <p class="text-muted m-0">¿Es tu primera vez? Registrate.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-4">
+        <a routerLink="/quien-soy" class="sj-card-link">
+          <div class="card h-100 text-center p-4 sj-card">
+            <i class="bi bi-person-badge display-4 text-warning mb-3"></i>
+            <h3>Quién Soy</h3>
+            <p class="text-muted m-0">Conocé al autor del proyecto.</p>
+          </div>
+        </a>
+      </div>
+    }
+
   </div>
 </section>
