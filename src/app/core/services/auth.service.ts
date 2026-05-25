@@ -59,16 +59,20 @@ export class AuthService {
     if (authError) throw authError;
     if (!authData.user) throw new Error('No se pudo crear el usuario.');
 
+    const nuevoPerfil: UsuarioProfile = {
+      id: authData.user.id,
+      correo: datos.correo,
+      nombre: datos.nombre,
+      apellido: datos.apellido,
+      edad: datos.edad,
+      created_at: new Date().toISOString(),
+    };
     const { error: perfilError } = await this.supabase.client
       .from('usuarios')
-      .insert({
-        id: authData.user.id,
-        correo: datos.correo,
-        nombre: datos.nombre,
-        apellido: datos.apellido,
-        edad: datos.edad,
-      });
+      .insert(nuevoPerfil);
     if (perfilError) throw perfilError;
+
+    this._profile.set(nuevoPerfil);
   }
 
   async logout(): Promise<void> {

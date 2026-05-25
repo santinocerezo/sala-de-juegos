@@ -52,7 +52,6 @@ export class Login {
 
   loginRapido(usuario: UsuarioRapido): void {
     this.form.setValue({ email: usuario.email, password: usuario.password });
-    this.onSubmit();
   }
 
   async onSubmit(): Promise<void> {
