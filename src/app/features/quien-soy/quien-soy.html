@@ -79,15 +79,40 @@
             <h3 class="fw-bold">
               <i class="bi bi-mortarboard me-2 text-primary"></i>Sobre el proyecto
             </h3>
-            <p class="mb-2">
+            <p class="mb-0">
               Este TP corresponde a la materia <strong>Programación IV</strong>
               de la Tecnicatura Universitaria en Programación
-              (<strong>UTN Avellaneda</strong>).
+              (<strong>UTN Avellaneda</strong>). La aplicación se construye por
+              sprints.
             </p>
-            <p class="mb-0">
-              La aplicación se construye por sprints. El juego propio se
-              definirá más adelante; las reglas se van a explicar en esta misma
-              página cuando esté implementado.
+          </div>
+        </div>
+
+        <div class="card shadow mt-4 sj-perfil-card">
+          <div class="card-body p-4">
+            <h3 class="fw-bold">
+              <i class="bi bi-palette-fill me-2 text-info"></i>Juego propio: Mezclar colores
+            </h3>
+            <p class="mb-2">
+              Un juego de memoria visual y precisión. La pantalla muestra un
+              color aleatorio durante <strong>5 segundos</strong>; cuando
+              desaparece, tenés que reproducirlo ajustando tres sliders
+              verticales: <strong>Hue</strong> (matiz), <strong>Saturation</strong>
+              (saturación) y <strong>Brightness</strong> (brillo). El sistema
+              compara tu color con el original y te puntúa de
+              <strong>0.00 a 10.00</strong> según qué tan cerca quedaste.
+            </p>
+            <p class="mb-2"><strong>Cómo se juega:</strong></p>
+            <ol class="mb-2">
+              <li>Apretás <em>Empezar</em>. Aparece la cuenta <em>Ready, Set, Go!</em></li>
+              <li>Se muestra el color objetivo con un contador de 5.00 a 0.00.</li>
+              <li>El color se oculta. Reproducilo ajustando matiz, saturación y brillo (HSV).</li>
+              <li>Apretás <em>Confirmar mezcla</em> y ves tu puntaje + ambos colores lado a lado.</li>
+            </ol>
+            <p class="mb-0 text-muted small">
+              El puntaje se calcula con la distancia euclidiana entre los dos
+              colores en el espacio RGB (el HSV de los sliders se convierte
+              a RGB internamente), normalizada a un valor de 0.00 a 10.00.
             </p>
           </div>
         </div>

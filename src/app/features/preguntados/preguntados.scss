@@ -1,0 +1,22 @@
+.sj-pregunta-card {
+  background: linear-gradient(135deg, #198754 0%, #146c43 100%);
+  color: white;
+  border: 0;
+  box-shadow: 0 4px 14px rgba(25, 135, 84, 0.3);
+}
+
+.sj-opciones {
+  max-width: 600px;
+}
+
+.sj-opcion-btn {
+  text-align: left;
+  white-space: normal;
+}
+
+.sj-resultado {
+  font-size: 5rem;
+  font-weight: bold;
+  color: #198754;
+  font-family: 'Courier New', monospace;
+}

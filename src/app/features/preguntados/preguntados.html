@@ -1,0 +1,83 @@
+<section class="container py-5">
+  <div class="text-center mb-4">
+    <h2><i class="bi bi-patch-question-fill me-2 text-success"></i>Preguntados</h2>
+    <p class="text-muted small mb-0">Trivia con preguntas de la Open Trivia Database.</p>
+  </div>
+
+  @switch (estado()) {
+
+    @case ('cargando') {
+      <div class="text-center py-5">
+        <div class="spinner-border text-success" role="status"></div>
+        <p class="mt-3 text-muted">Trayendo preguntas...</p>
+      </div>
+    }
+
+    @case ('error') {
+      <div class="alert alert-danger text-center">
+        <i class="bi bi-exclamation-triangle me-2"></i>
+        {{ mensajeError() }}
+      </div>
+      <div class="text-center">
+        <button type="button" class="btn btn-primary me-2" (click)="iniciar()">
+          <i class="bi bi-arrow-clockwise me-1"></i>Reintentar
+        </button>
+        <a routerLink="/" class="btn btn-link">Volver al inicio</a>
+      </div>
+    }
+
+    @case ('jugando') {
+      @if (preguntaActual(); as pregunta) {
+        <div class="d-flex justify-content-between text-muted small mb-2">
+          <span>Pregunta {{ progreso() }}</span>
+          <span>Aciertos: <strong class="text-success">{{ aciertos() }}</strong></span>
+        </div>
+
+        <div class="card sj-pregunta-card mb-4">
+          <div class="card-body p-4 text-center">
+            <p class="fs-5 mb-0">{{ pregunta.enunciado }}</p>
+          </div>
+        </div>
+
+        <div class="d-grid gap-2 sj-opciones mx-auto">
+          @for (opcion of pregunta.opciones; track opcion) {
+            <button
+              type="button"
+              class="btn btn-lg sj-opcion-btn"
+              [class.btn-outline-primary]="!hayRespuesta()"
+              [class.btn-success]="hayRespuesta() && esCorrecta(opcion)"
+              [class.btn-danger]="hayRespuesta() && esSeleccionada(opcion) && !esCorrecta(opcion)"
+              [class.btn-outline-secondary]="hayRespuesta() && !esCorrecta(opcion) && !esSeleccionada(opcion)"
+              [disabled]="hayRespuesta()"
+              (click)="responder(opcion)"
+            >{{ opcion }}</button>
+          }
+        </div>
+      }
+    }
+
+    @case ('terminado') {
+      <div class="text-center py-4">
+        <h3 class="text-muted small mb-1">Resultado final</h3>
+        <div class="sj-resultado mb-3">{{ aciertos() }} / {{ total() }}</div>
+        <p class="text-muted">
+          @if (aciertos() === total()) {
+            ¡Perfecto! Acertaste todas.
+          } @else if (aciertos() >= total() / 2) {
+            ¡Bien hecho! Más de la mitad correctas.
+          } @else {
+            ¡Probá de nuevo!
+          }
+        </p>
+
+        <div class="mt-4">
+          <button type="button" class="btn btn-primary me-2" (click)="iniciar()">
+            <i class="bi bi-arrow-clockwise me-1"></i>Jugar de nuevo
+          </button>
+          <a routerLink="/" class="btn btn-link">Volver al inicio</a>
+        </div>
+      </div>
+    }
+
+  }
+</section>

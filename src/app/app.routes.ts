@@ -36,6 +36,21 @@ export const routes: Routes = [
     title: 'Chat global',
     loadComponent: () => import('./features/chat/chat').then(m => m.Chat),
   },
+  {
+    path: 'mezclar-colores',
+    title: 'Mezclar colores',
+    loadComponent: () => import('./features/mezclar-colores/mezclar-colores').then(m => m.MezclarColores),
+  },
+  {
+    path: 'preguntados',
+    title: 'Preguntados',
+    loadComponent: () => import('./features/preguntados/preguntados').then(m => m.Preguntados),
+  },
+  {
+    path: 'resultados',
+    title: 'Resultados',
+    loadComponent: () => import('./features/resultados/resultados').then(m => m.Resultados),
+  },
 
   // Cualquier ruta no reconocida vuelve al home.
   { path: '**', redirectTo: '' },
