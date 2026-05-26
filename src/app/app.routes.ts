@@ -21,6 +21,21 @@ export const routes: Routes = [
     title: 'Quién Soy',
     loadComponent: () => import('./features/quien-soy/quien-soy').then(m => m.QuienSoy),
   },
+  {
+    path: 'ahorcado',
+    title: 'Ahorcado',
+    loadComponent: () => import('./features/ahorcado/ahorcado').then(m => m.Ahorcado),
+  },
+  {
+    path: 'mayor-menor',
+    title: 'Mayor o Menor',
+    loadComponent: () => import('./features/mayor-menor/mayor-menor').then(m => m.MayorMenor),
+  },
+  {
+    path: 'chat',
+    title: 'Chat global',
+    loadComponent: () => import('./features/chat/chat').then(m => m.Chat),
+  },
 
   // Cualquier ruta no reconocida vuelve al home.
   { path: '**', redirectTo: '' },

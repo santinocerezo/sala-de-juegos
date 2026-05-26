@@ -17,7 +17,37 @@
   <div class="row g-4 justify-content-center">
 
     @if (user()) {
-      <div class="col-md-6">
+      <div class="col-md-6 col-lg-3">
+        <a routerLink="/ahorcado" class="sj-card-link">
+          <div class="card h-100 text-center p-4 sj-card">
+            <i class="bi bi-bookmark-heart display-4 text-danger mb-3"></i>
+            <h3>Ahorcado</h3>
+            <p class="text-muted m-0">Adiviná la palabra antes de quedarte sin intentos.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <a routerLink="/mayor-menor" class="sj-card-link">
+          <div class="card h-100 text-center p-4 sj-card">
+            <i class="bi bi-suit-spade-fill display-4 text-dark mb-3"></i>
+            <h3>Mayor o Menor</h3>
+            <p class="text-muted m-0">¿La próxima carta sube o baja?</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <a routerLink="/chat" class="sj-card-link">
+          <div class="card h-100 text-center p-4 sj-card">
+            <i class="bi bi-chat-dots-fill display-4 text-primary mb-3"></i>
+            <h3>Chat global</h3>
+            <p class="text-muted m-0">Hablá con el resto de jugadores en tiempo real.</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
         <a routerLink="/quien-soy" class="sj-card-link">
           <div class="card h-100 text-center p-4 sj-card">
             <i class="bi bi-person-badge display-4 text-warning mb-3"></i>
@@ -27,7 +57,7 @@
         </a>
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6 col-lg-3">
         <button
           type="button"
           class="sj-card-link w-100 border-0 bg-transparent p-0"
