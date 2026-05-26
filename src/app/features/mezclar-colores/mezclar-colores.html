@@ -1,0 +1,127 @@
+<section class="container py-5">
+  <div class="text-center mb-4">
+    <h2><i class="bi bi-palette-fill me-2 text-info"></i>Mezclar colores</h2>
+    <p class="text-muted">Memorizá el color y reproducilo ajustando matiz, saturación y brillo.</p>
+  </div>
+
+  @switch (estado()) {
+
+    @case ('idle') {
+      <div class="text-center">
+        <button type="button" class="btn btn-primary btn-lg" (click)="empezar()">
+          <i class="bi bi-play-fill me-2"></i>Empezar
+        </button>
+      </div>
+    }
+
+    @case ('ready') {
+      <div class="text-center sj-countdown">Ready</div>
+    }
+    @case ('set') {
+      <div class="text-center sj-countdown">Set</div>
+    }
+    @case ('go') {
+      <div class="text-center sj-countdown">Go!</div>
+    }
+
+    @case ('mostrando') {
+      <div class="d-flex justify-content-center mb-3">
+        <div class="sj-color-grande" [style.background]="cssObjetivo()"></div>
+      </div>
+      <div class="text-center sj-countdown-numero">{{ tiempoRestante().toFixed(2) }}</div>
+    }
+
+    @case ('mezclando') {
+      <div class="text-center mb-3 text-muted">
+        <i class="bi bi-eye-slash me-1"></i>Color oculto - reproducilo de memoria
+      </div>
+
+      <div class="sj-mezclador">
+
+        <div class="sj-sliders-zona">
+          <div class="sj-slider-grupo">
+            <input
+              type="range" min="0" max="360"
+              [value]="hue()"
+              (input)="actualizarHue($event)"
+              orient="vertical"
+              class="sj-slider-vertical sj-slider-hue"
+            />
+            <span class="sj-slider-label">Hue</span>
+          </div>
+
+          <div class="sj-slider-grupo">
+            <input
+              type="range" min="0" max="100"
+              [value]="saturation()"
+              (input)="actualizarSaturation($event)"
+              orient="vertical"
+              class="sj-slider-vertical"
+              [style.background]="gradienteSaturation()"
+            />
+            <span class="sj-slider-label">Saturation</span>
+          </div>
+
+          <div class="sj-slider-grupo">
+            <input
+              type="range" min="0" max="100"
+              [value]="brightness()"
+              (input)="actualizarBrightness($event)"
+              orient="vertical"
+              class="sj-slider-vertical"
+              [style.background]="gradienteBrightness()"
+            />
+            <span class="sj-slider-label">Brightness</span>
+          </div>
+        </div>
+
+        <div class="sj-preview" [style.background]="cssMezclado()"></div>
+
+      </div>
+
+      <div class="text-center mt-4">
+        <button type="button" class="btn btn-success btn-lg" (click)="confirmarMezcla()">
+          <i class="bi bi-check-lg me-2"></i>Confirmar mezcla
+        </button>
+      </div>
+    }
+
+    @case ('resultado') {
+      <div class="text-center mb-3">
+        <h3 class="text-muted small mb-1">Tu puntaje</h3>
+        <div class="sj-puntaje">{{ puntaje()?.toFixed(2) }}/10</div>
+      </div>
+
+      <div class="row g-3 justify-content-center mb-4">
+        <div class="col-auto text-center">
+          <p class="text-muted small mb-1">Objetivo</p>
+          <div class="sj-color-mediano" [style.background]="cssObjetivo()"></div>
+          <p class="small mt-1 mb-0 font-monospace">
+            ({{ colorObjetivo()?.r }}, {{ colorObjetivo()?.g }}, {{ colorObjetivo()?.b }})
+          </p>
+        </div>
+        <div class="col-auto text-center">
+          <p class="text-muted small mb-1">Tu mezcla</p>
+          <div class="sj-color-mediano" [style.background]="cssMezclado()"></div>
+          <p class="small mt-1 mb-0 font-monospace">
+            ({{ colorMezclado().r }}, {{ colorMezclado().g }}, {{ colorMezclado().b }})
+          </p>
+        </div>
+      </div>
+
+      <div class="text-center">
+        <button type="button" class="btn btn-primary me-2" (click)="empezar()">
+          <i class="bi bi-arrow-clockwise me-1"></i>Jugar de nuevo
+        </button>
+        <a routerLink="/" class="btn btn-link">Volver al inicio</a>
+      </div>
+    }
+
+  }
+
+  @if (estado() === 'idle') {
+    <div class="text-center mt-3">
+      <a routerLink="/" class="btn btn-link">Volver al inicio</a>
+    </div>
+  }
+</section>

@@ -1,0 +1,176 @@
+<section class="container py-5">
+  <div class="text-center mb-4">
+    <h2><i class="bi bi-trophy-fill me-2 text-warning"></i>Resultados</h2>
+    <p class="text-muted small mb-0">Top 10 de mejores partidas por juego.</p>
+  </div>
+
+  @if (cargando()) {
+    <div class="text-center py-5">
+      <div class="spinner-border text-warning" role="status"></div>
+      <p class="mt-3 text-muted">Cargando rankings...</p>
+    </div>
+  } @else if (error()) {
+    <div class="alert alert-danger text-center">
+      <i class="bi bi-exclamation-triangle me-2"></i>{{ error() }}
+    </div>
+    <div class="text-center">
+      <button type="button" class="btn btn-primary" (click)="cargar()">
+        <i class="bi bi-arrow-clockwise me-1"></i>Reintentar
+      </button>
+    </div>
+  } @else {
+
+    <div class="card mb-4 sj-ranking-card">
+      <div class="card-header sj-ranking-header bg-danger text-white">
+        <i class="bi bi-bookmark-heart me-2"></i><strong>Ahorcado</strong>
+      </div>
+      <div class="card-body p-0">
+        @if (ahorcado().length === 0) {
+          <p class="text-muted text-center m-3">Todavía no hay partidas jugadas.</p>
+        } @else {
+          <div class="table-responsive">
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Jugador</th>
+                  <th>Resultado</th>
+                  <th>Letras OK</th>
+                  <th>Letras mal</th>
+                  <th>Tiempo</th>
+                  <th>Fecha</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (p of ahorcado(); track p.id; let i = $index) {
+                  <tr>
+                    <td class="text-center fw-bold">{{ i + 1 }}</td>
+                    <td>{{ p.nombre }}</td>
+                    <td>
+                      @if (p.gano) {
+                        <span class="badge bg-success">Ganó</span>
+                      } @else {
+                        <span class="badge bg-secondary">Perdió</span>
+                      }
+                    </td>
+                    <td>{{ p.letras_acertadas }}</td>
+                    <td>{{ p.letras_falladas }}</td>
+                    <td>{{ p.duracion_segundos }}s</td>
+                    <td>{{ formatearFecha(p.created_at) }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="card mb-4 sj-ranking-card">
+      <div class="card-header sj-ranking-header bg-dark text-white">
+        <i class="bi bi-suit-spade-fill me-2"></i><strong>Mayor o Menor</strong>
+      </div>
+      <div class="card-body p-0">
+        @if (mayorMenor().length === 0) {
+          <p class="text-muted text-center m-3">Todavía no hay partidas jugadas.</p>
+        } @else {
+          <div class="table-responsive">
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Jugador</th>
+                  <th>Cartas acertadas</th>
+                  <th>Fecha</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (p of mayorMenor(); track p.id; let i = $index) {
+                  <tr>
+                    <td class="text-center fw-bold">{{ i + 1 }}</td>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ p.cartas_acertadas }}</td>
+                    <td>{{ formatearFecha(p.created_at) }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="card mb-4 sj-ranking-card">
+      <div class="card-header sj-ranking-header bg-info text-white">
+        <i class="bi bi-palette-fill me-2"></i><strong>Mezclar colores</strong>
+      </div>
+      <div class="card-body p-0">
+        @if (mezclarColores().length === 0) {
+          <p class="text-muted text-center m-3">Todavía no hay partidas jugadas.</p>
+        } @else {
+          <div class="table-responsive">
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Jugador</th>
+                  <th>Puntaje</th>
+                  <th>Fecha</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (p of mezclarColores(); track p.id; let i = $index) {
+                  <tr>
+                    <td class="text-center fw-bold">{{ i + 1 }}</td>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ p.puntaje.toFixed(2) }}/10</td>
+                    <td>{{ formatearFecha(p.created_at) }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="card mb-4 sj-ranking-card">
+      <div class="card-header sj-ranking-header bg-success text-white">
+        <i class="bi bi-patch-question-fill me-2"></i><strong>Preguntados</strong>
+      </div>
+      <div class="card-body p-0">
+        @if (preguntados().length === 0) {
+          <p class="text-muted text-center m-3">Todavía no hay partidas jugadas.</p>
+        } @else {
+          <div class="table-responsive">
+            <table class="table table-striped mb-0">
+              <thead>
+                <tr>
+                  <th class="text-center">#</th>
+                  <th>Jugador</th>
+                  <th>Aciertos</th>
+                  <th>Fecha</th>
+                </tr>
+              </thead>
+              <tbody>
+                @for (p of preguntados(); track p.id; let i = $index) {
+                  <tr>
+                    <td class="text-center fw-bold">{{ i + 1 }}</td>
+                    <td>{{ p.nombre }}</td>
+                    <td>{{ p.aciertos }}/{{ p.total }}</td>
+                    <td>{{ formatearFecha(p.created_at) }}</td>
+                  </tr>
+                }
+              </tbody>
+            </table>
+          </div>
+        }
+      </div>
+    </div>
+
+  }
+
+  <div class="text-center mt-3">
+    <a routerLink="/" class="btn btn-link">Volver al inicio</a>
+  </div>
+</section>
