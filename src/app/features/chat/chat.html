@@ -1,0 +1,64 @@
+<section class="container py-4">
+  <div class="text-center mb-3">
+    <h2><i class="bi bi-chat-dots-fill me-2 text-primary"></i>Chat global</h2>
+    <p class="text-muted small mb-0">Hablá con todos los jugadores conectados.</p>
+  </div>
+
+  <div class="card shadow-sm sj-chat-card">
+    <div #contenedorMensajes class="card-body sj-chat-mensajes">
+
+      @if (cargando()) {
+        <div class="text-center text-muted py-4">
+          <span class="spinner-border spinner-border-sm me-2"></span>
+          Cargando mensajes...
+        </div>
+      } @else if (mensajes().length === 0) {
+        <div class="text-center text-muted py-4">
+          <i class="bi bi-chat-square-dots fs-3 d-block mb-2"></i>
+          Todavía no hay mensajes. ¡Sé el primero!
+        </div>
+      } @else {
+        @for (m of mensajes(); track m.id) {
+          <div class="sj-mensaje" [class.sj-mensaje-propio]="esPropio(m)">
+            <div class="sj-mensaje-meta">
+              <strong>{{ esPropio(m) ? 'Vos' : m.nombre_autor }}</strong>
+              <span class="ms-2">{{ formatearHora(m.created_at) }}</span>
+            </div>
+            <div class="sj-mensaje-texto">{{ m.contenido }}</div>
+          </div>
+        }
+      }
+
+    </div>
+
+    <div class="card-footer bg-white">
+      <form (ngSubmit)="enviar()" class="d-flex gap-2">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Escribí tu mensaje..."
+          [(ngModel)]="nuevoTexto"
+          name="texto"
+          [disabled]="enviando()"
+          maxlength="500"
+          autocomplete="off"
+        />
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="enviando() || !nuevoTexto().trim()"
+        >
+          @if (enviando()) {
+            <span class="spinner-border spinner-border-sm"></span>
+          } @else {
+            <i class="bi bi-send-fill"></i>
+          }
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <div class="text-center mt-3">
+    <a routerLink="/" class="btn btn-link">Volver al inicio</a>
+  </div>
+</section>

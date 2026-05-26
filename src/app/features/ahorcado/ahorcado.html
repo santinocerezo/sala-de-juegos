@@ -1,0 +1,52 @@
+<section class="container py-5">
+  <div class="text-center mb-4">
+    <h2><i class="bi bi-bookmark-heart me-2 text-danger"></i>Ahorcado</h2>
+    <p class="text-muted">Adiviná la palabra antes de quedarte sin intentos.</p>
+  </div>
+
+  <div class="d-flex justify-content-center gap-1 mb-4 fs-3">
+    @for (i of [].constructor(maxErrores); track $index) {
+      @if ($index < errores()) {
+        <i class="bi bi-heartbreak-fill text-secondary"></i>
+      } @else {
+        <i class="bi bi-heart-fill text-danger"></i>
+      }
+    }
+  </div>
+
+  <div class="text-center mb-4">
+    <span class="sj-palabra">{{ palabraMostrada() }}</span>
+  </div>
+
+  <div class="sj-teclado mx-auto mb-4">
+    @for (letra of abecedario; track letra) {
+      <button
+        type="button"
+        class="btn sj-letra"
+        [class.btn-outline-primary]="!letraYaUsada(letra)"
+        [class.btn-success]="letrasAcertadas().includes(letra)"
+        [class.btn-danger]="letrasFalladas().includes(letra)"
+        [disabled]="letraYaUsada(letra) || estado() !== 'jugando'"
+        (click)="seleccionarLetra(letra)"
+      >{{ letra }}</button>
+    }
+  </div>
+
+  <div class="text-center">
+    <button type="button" class="btn btn-outline-secondary me-2" (click)="nuevaPartida()">
+      <i class="bi bi-arrow-clockwise me-1"></i>Reiniciar
+    </button>
+    <a routerLink="/" class="btn btn-link">Volver al inicio</a>
+  </div>
+</section>
+
+@if (mostrarFin()) {
+  <app-modal
+    [open]="true"
+    [title]="estado() === 'ganado' ? '¡Ganaste!' : 'Perdiste'"
+    [message]="estado() === 'ganado'
+      ? 'Adivinaste la palabra: ' + palabra()
+      : 'La palabra era: ' + palabra()"
+    (closed)="cerrarFin()"
+  />
+}

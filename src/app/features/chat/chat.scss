@@ -1,0 +1,40 @@
+.sj-chat-card {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.sj-chat-mensajes {
+  height: 60vh;
+  overflow-y: auto;
+  background: #f7f7fb;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.sj-mensaje {
+  align-self: flex-start;
+  max-width: 75%;
+  padding: 0.5rem 0.85rem;
+  border-radius: 12px;
+  background: #fff;
+  border: 1px solid #e5e5ea;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+.sj-mensaje-propio {
+  align-self: flex-end;
+  background: #d1e7ff;
+  border-color: #b6d4ff;
+}
+
+.sj-mensaje-meta {
+  font-size: 0.75rem;
+  color: #666;
+  margin-bottom: 0.15rem;
+}
+
+.sj-mensaje-texto {
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
